@@ -1,6 +1,6 @@
 package Day05.Ex02_인자전달;
 
-import Day05.Ex01.Pikachu;
+import Day05.Ex01_상속.Pikachu;
 
 public class CallByReference {
 	

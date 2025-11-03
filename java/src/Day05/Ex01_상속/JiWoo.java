@@ -1,4 +1,4 @@
-package Day05.Ex01;
+package Day05.Ex01_상속;
 
 public class JiWoo {
 	public static void main(String[] args) {

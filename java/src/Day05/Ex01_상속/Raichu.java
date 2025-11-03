@@ -1,4 +1,6 @@
-package Day05.Ex01;
+package Day05.Ex01_상속;
+
+import Day05.Ex01_상속.Pikachu;
 
 /*
  상속 :

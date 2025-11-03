@@ -2,8 +2,8 @@ package Day05.Ex04_instanceof;
 
 import java.time.Period;
 
-import Day05.Ex01.Pikachu;
-import Day05.Ex01.Raichu;
+import Day05.Ex01_상속.Pikachu;
+import Day05.Ex01_상속.Raichu;
 
 public class Main {
     public static void main(String[] args) {
