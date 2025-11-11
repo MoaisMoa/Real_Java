@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -17,14 +18,16 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		Sequence sequence = new Sequence(); //시퀀스 객체 생성
+		
 		contactList = load(); //연락처 파일 불러오기
 		while(true) {
 			System.out.println(":::::::::: 연락처 프로그램 :::::::::");
-			System.out.println("1. 연락처 추가");
+			System.out.println("1.연락처 추가");
 			System.out.println("2.연락처 수정");
 			System.out.println("3.연락처 삭제");
 			System.out.println("4.연락처 목록");
-			System.out.println("0.   종료.   ");
+			System.out.println("0.종료");
 			System.out.println("메뉴 선택 : ");
 			
 			int menu = sc.nextInt();
@@ -34,7 +37,8 @@ public class Main {
 			case 0:
 				System.out.println("프로그램을 종료 합니다.");
 				sc.close();
-				break;
+				return;
+				
 			case 1: //연락처 추가
 				System.out.println("이름 : ");
 				String name = sc.nextLine();
@@ -45,7 +49,7 @@ public class Main {
 				System.out.println("메모 : ");
 				String memo = sc.nextLine();
 				
-				int no = contactList.size()+1;
+				int no = sequence.nextNo(); //저장된 시퀀스 사용!
 				
 				add(new Person(no,name,phone,memo));
 				
@@ -100,7 +104,27 @@ public class Main {
 	
 	//연락처 삭제
 	private static void delete(int deleteNo) {
-		contactList.remove(deleteNo-1);
+		//contactList.remove(deleteNo-1); =>인덱스 번호로 삭제된다..
+		
+		//시퀀스 기준으로 삭제! (stream 활용)
+		/*
+		contactList = contactList.stream()
+								 .filter(contact->contact.getNo()!=deleteNo)
+								 .collect(Collectors.toList());
+		*/
+		
+		//for문 활용 (stream과 동일하게 작동함)
+		Person deleteContact = null;
+		for(int i=0; i<contactList.size(); i++) {
+			Person contact = contactList.get(i);
+			if(contact.getNo()==deleteNo) {
+				deleteContact = contact;
+				break;
+			}
+		}
+		
+		
+		contactList.remove(deleteContact);
 		save(contactList);
 	}
 	
